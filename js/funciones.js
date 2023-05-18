@@ -95,10 +95,11 @@ $(".pu").on("click",function()
 		var nom=$(".brillit").val();
 		var cor=$(".alan").val();
 		var com=$(".dulce").val();
+		var fec=$(".hoy").val();
 		
 
 		
-		$(".muestra").html("De:"+nom+"<br>"+"Comentario:"+com+"<br>"+"Correo:"+cor+"<br>");
+		$(".muestra").html("De:"+nom+"<br>"+"Comentario:"+com+"<br>"+"Correo:"+cor+"<br>"+"Fecha:"+fec+"<br>");
 		
 		$(".muestra").prepend(newComent);
 		$('.day')[0].reset();
@@ -181,6 +182,7 @@ function renderCart() {
   });
 }
 
+
 // Agregar el evento "click" a los botones de "Agregar"
 productItems.forEach((item) => {
   const name = item.dataset.name;
@@ -190,6 +192,101 @@ productItems.forEach((item) => {
     addToCart(name, price);
   });
 });
+
+		const pagarButton = document.querySelector('.pagar .add-to-cart');
+pagarButton.addEventListener('click', handlePagar);
+
+function handlePagar() {
+  const paymentOptions = document.getElementsByName('payment-option');
+  let selectedOption;
+
+  for (let i = 0; i < paymentOptions.length; i++) {
+    if (paymentOptions[i].checked) {
+      selectedOption = paymentOptions[i].value;
+      break;
+    }
+  }
+
+  if (selectedOption) {
+    // Aquí puedes realizar acciones según la opción de pago seleccionada
+    switch (selectedOption) {
+      case 'tarjeta':
+        // Lógica para procesar el pago con tarjeta
+        break;
+      case 'efectivo':
+        // Lógica para procesar el pago en efectivo
+        break;
+      case 'transferencia':
+        // Lógica para procesar el pago por transferencia
+        break;
+    }
+
+    // Lógica adicional para completar la compra, enviar el correo electrónico, etc.
+  } else {
+    alert('Por favor, selecciona una opción de pago.');
+  }
+}
+
+// Definir el objeto del menú
+var menu = {
+  bizcocho: [
+    { nombre: "Bizcochos Toppins Libres", descripcion: "Estilo de tu preferencia puedes escojer de distos sabores", precio: 10.99 },
+    { nombre: "Bizcochos de tres leches", descripcion: "-Frutas", precio: 6.99 }
+    { nombre: "Bizcochos de Chocolate", descripcion: "untables, chocolate y chispas de chocolate", precio: 10.99 },
+    { nombre: "Pastel de Vainillas", descripcion: "Decoracion, betun de vainilla y chispas de colores", precio: 6.99 }
+  ],
+  Donas: [
+    { nombre: "Donas", descripcion: "mermelada de fresa y chispas de chocolate", precio: 18.99 },
+    { nombre: "mini donas de chocolate", descripcion: "chispas de chocolate", precio: 12.99 }
+     { nombre: "Mini donas", descripcion: "fragmentos de nuez y lechera", precio: 18.99 },
+    { nombre: "mini donas de chocolate", descripcion: "chispas de chocolate", precio: 12.99 }
+  ],
+  postres: [
+    { nombre: "Cheesecake de Fresa", descripcion: "Cheesecake de fresa con cobertura de frutos rojos.", precio: 8.99 },
+    { nombre: "Tarta de Manzana", descripcion: "Tarta de manzana casera con canela y helado de vainilla.", precio: 7.99 }
+  ]
+};
+
+// Función para generar el resumen del menú
+function generarResumenMenu(menu) {
+  var resumen = "Menú del Restaurante:\n\n";
+
+  // Entradas
+  resumen += "Entradas:\n";
+  menu.entradas.forEach(function(entrada) {
+    resumen += "- " + entrada.nombre + ": " + entrada.descripcion + " ($" + entrada.precio + ")\n";
+  });
+
+  resumen += "\n";
+
+  // Platos principales
+  resumen += "Platos Principales:\n";
+  menu.platosPrincipales.forEach(function(plato) {
+    resumen += "- " + plato.nombre + ": " + plato.descripcion + " ($" + plato.precio + ")\n";
+  });
+
+  resumen += "\n";
+
+  // Postres
+  resumen += "Postres:\n";
+  menu.postres.forEach(function(postre) {
+    resumen += "- " + postre.nombre + ": " + postre.descripcion + " ($" + postre.precio + ")\n";
+  });
+
+  return resumen;
+}
+
+// Ejemplo de uso
+var resumenMenu = generarResumenMenu(menu);
+console.log(resumenMenu);
+
+
+	
+		
+	$(".pagar").on("click",function()
+	{$(".opc").show();
+	
+	});
 
 $(".deta1").hide();
 $(".photo1").on("click", function()
